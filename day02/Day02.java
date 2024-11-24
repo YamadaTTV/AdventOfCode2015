@@ -49,7 +49,37 @@ public class Day02 {
         System.out.println(totalPaper);
     }
 
+    public static void part2() throws IOException{
+        List<String> input = readInput("input/day02.txt");
+        int length;
+        int width;
+        int height;
+        int bow;
+        int ribbon;
+        int totalRibbon = 0;
+        for(int i = 0; i < input.size(); i++){
+            String[] split = input.get(i).split("x");
+            length = Integer.parseInt(split[0]);
+            width = Integer.parseInt(split[1]);
+            height = Integer.parseInt(split[2]);
+            bow = length * width * height;
+            int lw = length * width;
+            int wh = width * height;
+            int hl = height * length;
+            if(lw <= wh && lw <= hl){
+                ribbon = length + length + width + width;
+            } else if(wh <= lw && wh <= hl){
+                ribbon = width + width + height + height;
+            } else {
+                ribbon = height + height + length + length;
+            }
+            totalRibbon += bow + ribbon;
+        }
+        System.out.println(totalRibbon);
+    }
+
     public static void main(String[] args) throws IOException {
         part1();
+        part2();
     }
 }
